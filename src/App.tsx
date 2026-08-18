@@ -47,7 +47,7 @@ export const App = () => {
             <Route path="/people">
               <Route index element={<People onLoad={getPreparedPeople} />} />
               <Route
-                path="/people/:peopleSlug"
+                path=":slug"
                 element={<People onLoad={getPreparedPeople} />}
               />
             </Route>

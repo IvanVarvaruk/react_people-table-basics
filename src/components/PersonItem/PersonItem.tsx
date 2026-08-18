@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { Person } from '../../types';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { PersonLink } from '../PersonLink';
 
 type Props = {
   person: Person;
@@ -17,35 +18,24 @@ export const PersonItem: React.FC<Props> = ({ person }) => {
       })}
     >
       <td>
-        <Link
-          to={`/people/${person.slug}`}
+        <PersonLink
+          person={person}
           className={classNames({ 'has-text-danger': person.sex === 'f' })}
-        >
-          {person.name}
-        </Link>
+        />
       </td>
 
       <td>{person.sex}</td>
       <td>{person.born}</td>
       <td>{person.died}</td>
       <td>
-        {person.mother ? (
-          <Link
-            to={`/people/${person.mother.slug}`}
-            className="has-text-danger"
-          >
-            {person.motherName}
-          </Link>
-        ) : (
-          person.motherName || '-'
-        )}
+        <PersonLink
+          person={person.mother}
+          name={person.motherName}
+          className="has-text-danger"
+        />
       </td>
       <td>
-        {person.father ? (
-          <Link to={`/people/${person.father.slug}`}>{person.fatherName}</Link>
-        ) : (
-          person.fatherName || '-'
-        )}
+        <PersonLink person={person.father} name={person.fatherName} />
       </td>
     </tr>
   );
